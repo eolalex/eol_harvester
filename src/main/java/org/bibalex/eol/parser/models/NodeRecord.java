@@ -1,6 +1,6 @@
 package org.bibalex.eol.parser.models;
 
-import org.neo4j.cypher.internal.frontend.v2_3.ast.functions.Str;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -8,26 +8,44 @@ import java.util.Map;
 /*
 This class will include the needed objects and attributes and is compatible with MongodB
  */
+
 public class NodeRecord {
+
+    private class gnParser{
+        String italicized;
+        String genus;
+        String specific_epithet;
+        String infraspecific_epithet;
+        String infrageneric_epithet;
+        String uninomial;
+        String authorship;
+        String publication;
+        int parse_quality;
+        String year;
+        boolean hybrid;
+        boolean surrogate;
+        boolean virus;
+
+    }
     int resourceId;
     String nodeId;
     String _id;
     Integer parentGNId; // neo4j
     Boolean preferred;  // taxon matching
-    Integer pageId;     // taxon matching
+    Integer pageId;
     String acceptedNameUsageId;
     String rank;
-    String canonicalName; // gnparser
+   // String canonicalName; // gnparser
     String scientificName;
-    String italicizedScientificName;  // gnparser
+   // String italicizedScientificName;  // gnparser
+    gnParser gnParserAttributes;
     String taxonomicStatus;
     String landMark;
     String[] referenceIds; // after parsing referecnes
-    String[] identifiers; // TODO
-    Boolean hasBreadCrumb; // TODO
+    String[] identifiers;
     String sourceUrl; //TODO FOUND IN JR'S DOC BUT NOT IN FILE
     String remarks;
-    String attributions; // TODO injr but where n file
+    String attribution;
     ArrayList<VernacularName> vernaculars;
     String deltaStatus;
 
@@ -37,7 +55,7 @@ public class NodeRecord {
     }
 
     public NodeRecord(String nodeId, int resourceId, String _id, String acceptedNameUsageId, String rank,
-                      String scientificName,String taxonomicStatus, String landMark, String remarks,
+                      String scientificName,String taxonomicStatus, String landMark, String remarks, String attribution,
                        String deltaStatus){
         this.nodeId = nodeId;
         this.resourceId = resourceId;
@@ -48,6 +66,7 @@ public class NodeRecord {
         this.taxonomicStatus = taxonomicStatus;
         this.landMark = landMark;
         this.remarks = remarks;
+        this.attribution = attribution;
         this.deltaStatus = deltaStatus;
     }
 
@@ -131,28 +150,12 @@ public class NodeRecord {
         this.rank = rank;
     }
 
-    public String getCanonicalName() {
-        return canonicalName;
-    }
-
-    public void setCanonicalName(String canonicalName) {
-        this.canonicalName = canonicalName;
-    }
-
     public String getScientificName() {
         return scientificName;
     }
 
     public void setScientificName(String scientificName) {
         this.scientificName = scientificName;
-    }
-
-    public String getItalicizedScientificName() {
-        return italicizedScientificName;
-    }
-
-    public void setItalicizedScientificName(String italicizedScientificName) {
-        this.italicizedScientificName = italicizedScientificName;
     }
 
     public String getTaxonomicStatus() {
@@ -187,14 +190,6 @@ public class NodeRecord {
         this.identifiers = identifiers;
     }
 
-    public Boolean getHasBreadCrumb() {
-        return hasBreadCrumb;
-    }
-
-    public void setHasBreadCrumb(Boolean hasBreadCrumb) {
-        this.hasBreadCrumb = hasBreadCrumb;
-    }
-
     public String getSourceUrl() {
         return sourceUrl;
     }
@@ -211,12 +206,12 @@ public class NodeRecord {
         this.remarks = remarks;
     }
 
-    public String getAttributions() {
-        return attributions;
+    public String getAttribution() {
+        return attribution;
     }
 
-    public void setAttributions(String attributions) {
-        this.attributions = attributions;
+    public void setAttribution(String attribution) {
+        this.attribution = attribution;
     }
 
 

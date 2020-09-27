@@ -333,8 +333,11 @@ public class DwcaParser {
                 record.core().value(DwcTerm.acceptedNameUsageID), record.core().value(DwcTerm.taxonRank),
                 record.core().value(DwcTerm.scientificName), record.core().value(DwcTerm.taxonomicStatus),
                 record.core().value(TermFactory.instance().findTerm(TermURIs.landmark)), record.core().value(DwcTerm.taxonRemarks),
-                action
+                record.core().value(DwcTerm.nameAccordingTo), action
         );
+//        String [] identifiers = record.core().value(TermFactory.instance().findTerm(TermURIs.sourceURI))
+//                .split(",\\s*");
+//        taxonData.setIdentifiers(identifiers);
 
         if (resourceID != Integer.valueOf(PropertiesHandler.getProperty("DWHId")) && generatedNodeId != -1) {
             //todo: Menna uncomment and check this
@@ -343,7 +346,7 @@ public class DwcaParser {
 //            if (pageId != 0)
 //                taxonData.setpageId(pageId);
         }
-        //todo: remove nest line and uncomment the above if condition
+        //todo: remove next line and uncomment the above if condition
         taxonData.setPageId(3);
         System.out.println("taxon ------>" + taxonData.getNodeId());
         return taxonData;

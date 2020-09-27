@@ -167,7 +167,7 @@ public class RestClientHandler {
 
             HttpEntity<Object> entity = new HttpEntity<Object>(nodes, headers);
             // Send the request as POST
-            response = restTemplate.exchange(uri, HttpMethod.POST, entity, Boolean.class);
+            response = restTemplate.exchange(uri, HttpMethod.POST,entity, Boolean.class);
             if (response.getStatusCode() == HttpStatus.OK) {
                 System.out.println(response.getBody());
             } else {

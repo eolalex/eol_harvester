@@ -132,9 +132,9 @@ public class GlobalNamesHandler {
 //        System.out.println("================================================");
 //        System.out.println(gnh.getAuthors("Gymnodiniales s.l."));
 //        System.out.println("================================================");
-        System.out.println(gnh.isParsed("Parus major Linnaeus, 1788"));
-        System.out.println(gnh.isParsed("Parus major"));
-        System.out.println(gnh.isParsed("unplaced extinct Diptera"));
+        System.out.println(gnh.getParsedJson("Parus major Linnaeus, 1788"));
+       // System.out.println(gnh.isParsed("Parus major"));
+        //System.out.println(gnh.isParsed("unplaced extinct Diptera"));
 //        System.out.println(gnh.getAuthors("unplaced extinct Diptera"));
 //        gnh.hasAuthority("test");
     }

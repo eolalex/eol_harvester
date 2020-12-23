@@ -36,7 +36,6 @@ public class SolrHandler {
         solr = new CloudSolrClient(zkHostString);
 //        solr= new CloudSolrClient.Builder().withZkHost(zkHostString).build();
         solr.setDefaultCollection(defaultCollection);
-        globalNameHandler = new GlobalNamesHandler();
         logger = LogHandler.getLogger(NodeMapper.class.getName());
         openConnection("indexer");
     }
@@ -142,13 +141,14 @@ public class SolrHandler {
         ArrayList<String> canonicalSynonyms = new ArrayList<>();
         ArrayList<String> otherCanonicalSynonyms = new ArrayList<>();
         ArrayList<String> otherSynonyms = new ArrayList<>();
+        globalNameHandler = new GlobalNamesHandler(node.getScientificName());
 
         if (node.getResourceId() == Integer.valueOf(ResourceHandler.getPropertyValue("DWHId"))) {
             synonyms.add(node.getScientificName());
-            canonicalSynonyms.add(globalNameHandler.getCanonicalForm(node.getScientificName()));
+            canonicalSynonyms.add(globalNameHandler.getCanonicalForm());
         } else {
             otherSynonyms.add(node.getScientificName());
-            otherCanonicalSynonyms.add(globalNameHandler.getCanonicalForm(node.getScientificName()));
+            otherCanonicalSynonyms.add(globalNameHandler.getCanonicalForm());
         }
 
 

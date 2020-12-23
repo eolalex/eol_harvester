@@ -1,32 +1,17 @@
 package org.bibalex.eol.parser.models;
 
+import com.bibalex.taxonmatcher.handlers.GlobalNamesHandler;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.*;
 
 /*
 This class will include the needed objects and attributes and is compatible with MongodB
  */
-
 public class NodeRecord {
 
-    private class gnParser{
-        String italicized;
-        String genus;
-        String specific_epithet;
-        String infraspecific_epithet;
-        String infrageneric_epithet;
-        String uninomial;
-        String authorship;
-        String publication;
-        int parse_quality;
-        String year;
-        boolean hybrid;
-        boolean surrogate;
-        boolean virus;
-
-    }
     int resourceId;
     String nodeId;
     String _id;
@@ -35,13 +20,11 @@ public class NodeRecord {
     Integer pageId;
     String acceptedNameUsageId;
     String rank;
-   // String canonicalName; // gnparser
     String scientificName;
-   // String italicizedScientificName;  // gnparser
-    gnParser gnParserAttributes;
+    GnParser gnParserAttributes;
     String taxonomicStatus;
     String landMark;
-    String[] referenceIds; // after parsing referecnes
+    ArrayList<Reference> references = new ArrayList<>(); // after parsing referecnes
     String[] identifiers;
     String sourceUrl; //TODO FOUND IN JR'S DOC BUT NOT IN FILE
     String remarks;
@@ -68,6 +51,16 @@ public class NodeRecord {
         this.remarks = remarks;
         this.attribution = attribution;
         this.deltaStatus = deltaStatus;
+    }
+    public void getGnAttributes(String scientificName) {
+        GlobalNamesHandler gnh = new GlobalNamesHandler(scientificName);
+        gnParserAttributes = new GnParser();
+        gnParserAttributes.canonicalName = gnh.getCanonicalForm();
+        gnParserAttributes.authorshipInfo = gnh.getAuthorAttributes();
+        gnParserAttributes.parse_quality =  gnh.getAttribute("quality");
+        gnParserAttributes.hybrid =(boolean) gnh.getAttribute("hybrid");
+        gnParserAttributes.surrogate = (boolean)gnh.getAttribute("surrogate");
+        gnParserAttributes.virus = (boolean) gnh.getAttribute("virus");
     }
 
     public String getDeltaStatus() {
@@ -174,12 +167,12 @@ public class NodeRecord {
         this.landMark = landMark;
     }
 
-    public String[] getReferenceIds() {
-        return referenceIds;
+    public ArrayList<Reference> getReferences() {
+        return references;
     }
 
-    public void setReferenceIds(String[] referenceIds) {
-        this.referenceIds = referenceIds;
+    public void setReferences( ArrayList<Reference> references) {
+        this.references = references;
     }
 
     public String[] getIdentifiers() {
@@ -214,5 +207,36 @@ public class NodeRecord {
         this.attribution = attribution;
     }
 
+    public void setGnParserAttributes(GnParser gnParserAttributes) {
+       this.gnParserAttributes = gnParserAttributes;
+    }
 
+    public GnParser getGnParserAttributes() {
+        return gnParserAttributes;
+    }
+
+    @Override
+    public String toString() {
+        return "NodeRecord{" +
+                "resourceId=" + resourceId +
+                ", nodeId='" + nodeId + '\'' +
+                ", _id='" + _id + '\'' +
+                ", parentGNId=" + parentGNId +
+                ", preferred=" + preferred +
+                ", pageId=" + pageId +
+                ", acceptedNameUsageId='" + acceptedNameUsageId + '\'' +
+                ", rank='" + rank + '\'' +
+                ", scientificName='" + scientificName + '\'' +
+                ", gnParserAttributes=" + gnParserAttributes +
+                ", taxonomicStatus='" + taxonomicStatus + '\'' +
+                ", landMark='" + landMark + '\'' +
+                ", references=" + references +
+                ", identifiers=" + Arrays.toString(identifiers) +
+                ", sourceUrl='" + sourceUrl + '\'' +
+                ", remarks='" + remarks + '\'' +
+                ", attribution='" + attribution + '\'' +
+                ", vernaculars=" + vernaculars +
+                ", deltaStatus='" + deltaStatus + '\'' +
+                '}';
+    }
 }

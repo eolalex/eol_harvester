@@ -3,7 +3,7 @@ package org.bibalex.eol.parser.models;
 import java.util.ArrayList;
 
 public class Media {
-    //TODO: ADD RESOURCEiD AND CHECK ATTRIBUTES WITH THAT OF MONGO
+    int resourceId;
     String taxonId;
     String mediaId;
     String type;
@@ -29,22 +29,17 @@ public class Media {
     String contributor;
     String creator;
     ArrayList<Agent> agents;
-    //Todo: add those to location attributes
-    String locationCreated;
-    String genericLocation;
-    String latitude;
-    String longitude;
-    String altitude;
-    String referenceId;
+    MediaLocation locationAttributes;
+    ArrayList<Reference> references = new ArrayList<>();
     String deltaStatus;
     String storageLayerPath;
     String storageLayerThumbnailPath;
 
-    public Media(String taxonId,String mediaId, String type, String subType, String format, String subject, String title, String description, String accessURI,
+    public Media(int resourceId, String taxonId,String mediaId, String type, String subType, String format, String subject, String title, String description, String accessURI,
                  String thumbnailURI, String furtherInformationURI, String derivedFrom, String createDate, String modified, String language, String rating,
                  String audience, String license, String rights, String owner, String bibliographicCitation, String publisher, String contributor,
-                 String creator, String locationCreated, String genericLocation, String latitude, String longitude, String altitude,
-                 String referenceId, String storageLayerPath, String storageLayerThumbnailPath, String deltaStatus) {
+                 String creator,String storageLayerPath, String storageLayerThumbnailPath, String deltaStatus) {
+        this.resourceId = resourceId;
         this.taxonId = taxonId;
         this.mediaId = mediaId;
         this.type = type;
@@ -69,12 +64,6 @@ public class Media {
         this.publisher = publisher;
         this.contributor = contributor;
         this.creator = creator;
-        this.locationCreated = locationCreated;
-        this.genericLocation = genericLocation;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.altitude = altitude;
-        this.referenceId = referenceId;
         this.storageLayerPath = storageLayerPath;
         this.storageLayerThumbnailPath = storageLayerThumbnailPath;
         this.deltaStatus = deltaStatus;
@@ -100,6 +89,7 @@ public class Media {
     public void setTaxonId(String taxonId) {
         this.taxonId = taxonId;
     }
+
     public String getDeltaStatus() {
         return deltaStatus;
     }
@@ -182,6 +172,14 @@ public class Media {
 
     public void setFurtherInformationURI(String furtherInformationURI) {
         this.furtherInformationURI = furtherInformationURI;
+    }
+
+     public ArrayList<Reference> getReferences() {
+        return references;
+    }
+
+    public void setReferences(ArrayList<Reference> references) {
+        this.references = references;
     }
 
     public String getDerivedFrom() {
@@ -296,52 +294,12 @@ public class Media {
         this.agents = agents;
     }
 
-    public String getLocationCreated() {
-        return locationCreated;
+    public MediaLocation getLocationAttributes() {
+        return locationAttributes;
     }
 
-    public void setLocationCreated(String locationCreated) {
-        this.locationCreated = locationCreated;
-    }
-
-    public String getGenericLocation() {
-        return genericLocation;
-    }
-
-    public void setGenericLocation(String genericLocation) {
-        this.genericLocation = genericLocation;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
-
-    public String getAltitude() {
-        return altitude;
-    }
-
-    public void setAltitude(String altitude) {
-        this.altitude = altitude;
-    }
-
-    public String getReferenceId() {
-        return referenceId;
-    }
-
-    public void setReferenceId(String referenceId) {
-        this.referenceId = referenceId;
+    public void setLocationAttributes(MediaLocation locationAttributes) {
+        this.locationAttributes = locationAttributes;
     }
 
     public String getStorageLayerPath(){

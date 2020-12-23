@@ -2,6 +2,7 @@ package org.bibalex.eol.parser.models;
 
 public class Occurrence {
     String occurrenceId;
+    TraitTaxon taxonInfo;
     String eventId;
     String institutionCode;
     String collectionCode;
@@ -23,23 +24,17 @@ public class Occurrence {
     String eventDate;
     String modifiedDate;
     String locality;
-    String decimalLatitude;
-    String decimalLongitude;
-    String verbatimLatitude;
-    String verbatimLongitude;
-    String verbatimElevation;
+    TraitLocation location;
     String deltaStatus;
 
     public Occurrence(String occurrenceId, String eventId, String institutionCode, String collectionCode, String catalogNumber, String sex, String lifeStage,
                       String reproductiveCondition, String behavior, String establishmentMeans, String remarks, String countOfIndividuals,
                       String preparations, String fieldNotes, String samplingProtocol, String samplingEffort, String recordedBy, String identifiedBy,
-                      String dateIdentified, String eventDate, String modifiedDate, String locality, String decimalLatitude, String decimalLongitude,
-                      String verbatimLatitude, String verbatimLongitude, String verbatimElevation, String deltaStatus) {
+                      String dateIdentified, String eventDate, String modifiedDate, String locality, String deltaStatus) {
         this.occurrenceId = occurrenceId;
         this.eventId = eventId;
         this.institutionCode = institutionCode;
         this.collectionCode = collectionCode;
-
         this.catalogNumber = catalogNumber;
         this.sex = sex;
         this.lifeStage = lifeStage;
@@ -58,12 +53,18 @@ public class Occurrence {
         this.eventDate = eventDate;
         this.modifiedDate = modifiedDate;
         this.locality = locality;
-        this.decimalLatitude = decimalLatitude;
-        this.decimalLongitude = decimalLongitude;
-        this.verbatimLatitude = verbatimLatitude;
-        this.verbatimLongitude = verbatimLongitude;
-        this.verbatimElevation = verbatimElevation;
         this.deltaStatus = deltaStatus;
+    }
+
+    public Occurrence(){}
+
+    public TraitTaxon getTaxonInfo() {
+        return taxonInfo;
+    }
+
+    public void setTaxonInfo(TraitTaxon taxonInfo) {
+
+        this.taxonInfo = taxonInfo;
     }
 
     public String getOccurrenceId() {
@@ -251,43 +252,11 @@ public class Occurrence {
         this.locality = locality;
     }
 
-    public String getDecimalLatitude() {
-        return decimalLatitude;
+    public TraitLocation getLocation() {
+        return location;
     }
 
-    public void setDecimalLatitude(String decimalLatitude) {
-        this.decimalLatitude = decimalLatitude;
-    }
-
-    public String getDecimalLongitude() {
-        return decimalLongitude;
-    }
-
-    public void setDecimalLongitude(String decimalLongitude) {
-        this.decimalLongitude = decimalLongitude;
-    }
-
-    public String getVerbatimLatitude() {
-        return verbatimLatitude;
-    }
-
-    public void setVerbatimLatitude(String verbatimLatitude) {
-        this.verbatimLatitude = verbatimLatitude;
-    }
-
-    public String getVerbatimLongitude() {
-        return verbatimLongitude;
-    }
-
-    public void setVerbatimLongitude(String verbatimLongitude) {
-        this.verbatimLongitude = verbatimLongitude;
-    }
-
-    public String getVerbatimElevation() {
-        return verbatimElevation;
-    }
-
-    public void setVerbatimElevation(String verbatimElevation) {
-        this.verbatimElevation = verbatimElevation;
+    public void setLocation(TraitLocation location) {
+        this.location = location;
     }
 }

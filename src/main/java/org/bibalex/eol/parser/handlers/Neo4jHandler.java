@@ -241,6 +241,14 @@ public class Neo4jHandler {
 //        return generated_node_ids;
     }
 
+    public long getTraitId(){
+        long response = restClientHandler.getTraitId(PropertiesHandler.getProperty("getTraitId"));
+        System.out.println("===============================");
+        System.out.println("new trait Id = " + response);
+        System.out.println("===============================");
+        return response;
+    }
+
     public int updateAcceptedNode(int resourceId, String taxonId, String scientificName, String rank,
                                   int parentGeneratedNodeId, int pageId) {
         Node node = new Node(resourceId, taxonId, scientificName, rank, parentGeneratedNodeId, pageId);

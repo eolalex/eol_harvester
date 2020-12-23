@@ -28,7 +28,6 @@ public class MatchingScoreHandler {
         minimumAncestoryMatchPercentage = Double.parseDouble(ResourceHandler.getPropertyValue("minimumAncestoryMatchPercentage"));
         childMatchWeight = Double.parseDouble(ResourceHandler.getPropertyValue("childMatchWeight"));
         ancestorMatchWeight = Double.parseDouble(ResourceHandler.getPropertyValue("ancestorMatchWeight"));
-        globalNameHandler = new GlobalNamesHandler();
         minimumAncestorsMatch = new HashMap<>();
         minimumAncestorsMatch.put(0, 0.0);
         minimumAncestorsMatch.put(1, 1.0);
@@ -121,9 +120,11 @@ public class MatchingScoreHandler {
     }
 
     public double samenessOfNames(String node_scientific_name, String other_scientific_name){
-        if(globalNameHandler.getCanonicalForm(node_scientific_name).equalsIgnoreCase(globalNameHandler.getCanonicalForm(other_scientific_name))){
-            JSONArray node_authors = globalNameHandler.getAuthors(node_scientific_name);
-            JSONArray other_authors = globalNameHandler.getAuthors(other_scientific_name);
+        globalNameHandler = new GlobalNamesHandler(node_scientific_name);
+        GlobalNamesHandler globalNameHandler2 = new GlobalNamesHandler(other_scientific_name);
+        if(globalNameHandler.getCanonicalForm().equalsIgnoreCase(globalNameHandler2.getCanonicalForm())){
+            JSONArray node_authors = globalNameHandler.getAuthors();
+            JSONArray other_authors = globalNameHandler2.getAuthors();
             if (node_authors == null || other_authors == null){
                 if (node_authors == null && other_authors == null){
                     return 2;

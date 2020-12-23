@@ -23,16 +23,20 @@ public class Harvester {
 //        String dwcArchivePath = "/home/ba/EOL_Recources/4.tar.gz";
 //        Harvester harvester = new Harvester();
 //        harvester.processHarvesting(4);
+        String dwcArchivePath = "/home/ba/eol_workspace/originals/1000.zip";
+        Harvester harvester = new Harvester();
+        harvester.processHarvesting(1000);
         HarvesterAPI harvesterAPI= new HarvesterAPI();
         try {
             PropertiesHandler.initializeProperties();
             StorageLayerClient.downloadResource(179+"", "1","1");
             String path = PropertiesHandler.getProperty
                     ("storage.output.directory") + File.separator + 179 + "_org";
+
             System.out.println("henaaaaaaaaaaaaaa "+ path);
 
 //            return true;
-//            harvesterAPI.callValidation(path, 179, true);
+           // harvesterAPI.callValidation(path, 179, true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,8 +61,8 @@ public class Harvester {
 
     public String harvest(String dwcArchivePath, int resourceId){
         Archive dwcArchive = openDwcAFolder(dwcArchivePath);
-        DwcaParser dwcaP = new DwcaParser(dwcArchive, true, null);
-        dwcaP.prepareNodesRecord(resourceId);
+        DwcaParser dwcaP = new DwcaParser(dwcArchive, true, null, resourceId);
+        dwcaP.prepareNodesRecord();
         return "success";
     }
 

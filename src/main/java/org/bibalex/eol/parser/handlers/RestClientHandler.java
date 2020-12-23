@@ -9,8 +9,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.ProxyAuthenticationStrategy;
 import org.bibalex.eol.parser.handlers.PropertiesHandler;
-import org.bibalex.eol.parser.models.Node;
-import org.bibalex.eol.parser.models.NodeRecord;
+import org.bibalex.eol.parser.models.*;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -136,6 +135,25 @@ public class RestClientHandler {
         return 0;
     }
 
+    public long getTraitId(String uri){
+        if (!uri.equalsIgnoreCase("")){
+
+            RestTemplate restTemplate = handleRestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.set("Accept", "application/json");
+            ResponseEntity response = null;
+            response = restTemplate.exchange(uri, HttpMethod.GET, null ,long.class);
+            if (response.getStatusCode() == HttpStatus.OK) {
+                return (long) response.getBody();
+            } else {
+                System.out.println("returned code(" + response.getStatusCode() + ")");
+            }
+
+        }
+        return 0;
+    }
+
     public Object getPlaceholderNodes(String uri){
         if (!uri.equalsIgnoreCase("")) {
 
@@ -159,6 +177,7 @@ public class RestClientHandler {
 
     public void sendNodestoMongodB(String uri, List<NodeRecord> nodes){
         if (!uri.equalsIgnoreCase("")){
+
             RestTemplate restTemplate = handleRestTemplate();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -175,7 +194,92 @@ public class RestClientHandler {
             }
         }
 
-}
+    }
+
+    public void sendMediatoMongodB(String uri, List<Media> media){
+        if (!uri.equalsIgnoreCase("")){
+
+            RestTemplate restTemplate = handleRestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.set("Accept", "application/json");
+            ResponseEntity response = null;
+
+            System.out.print("count" + media.size());
+            HttpEntity<Object> entity = new HttpEntity<Object>(media, headers);
+            // Send the request as POST
+            response = restTemplate.exchange(uri, HttpMethod.POST,entity, Boolean.class);
+            if (response.getStatusCode() == HttpStatus.OK) {
+                System.out.println(response.getBody());
+            } else {
+                System.out.println("returned code(" + response.getStatusCode() + ")");
+            }
+        }
+
+    }
+
+    public void sendArticlestoMongodB(String uri, List<Article> articles){
+        if (!uri.equalsIgnoreCase("")){
+
+            RestTemplate restTemplate = handleRestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.set("Accept", "application/json");
+            ResponseEntity response = null;
+
+            HttpEntity<Object> entity = new HttpEntity<Object>(articles, headers);
+            // Send the request as POST
+            response = restTemplate.exchange(uri, HttpMethod.POST,entity, Boolean.class);
+            if (response.getStatusCode() == HttpStatus.OK) {
+                System.out.println(response.getBody());
+            } else {
+                System.out.println("returned code(" + response.getStatusCode() + ")");
+            }
+        }
+
+    }
+
+    public void sendTraitstoMongodB(String uri, List<Trait> traits){
+        if (!uri.equalsIgnoreCase("")){
+
+            RestTemplate restTemplate = handleRestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.set("Accept", "application/json");
+            ResponseEntity response = null;
+
+            HttpEntity<Object> entity = new HttpEntity<Object>(traits, headers);
+            // Send the request as POST
+            response = restTemplate.exchange(uri, HttpMethod.POST,entity, Boolean.class);
+            if (response.getStatusCode() == HttpStatus.OK) {
+                System.out.println(response.getBody());
+            } else {
+                System.out.println("returned code(" + response.getStatusCode() + ")");
+            }
+        }
+
+    }
+
+    public void sendMetadatatoMongodB(String uri, List<Metadata> metadata){
+        if (!uri.equalsIgnoreCase("")){
+
+            RestTemplate restTemplate = handleRestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.set("Accept", "application/json");
+            ResponseEntity response = null;
+
+            HttpEntity<Object> entity = new HttpEntity<Object>(metadata, headers);
+            // Send the request as POST
+            response = restTemplate.exchange(uri, HttpMethod.POST,entity, Boolean.class);
+            if (response.getStatusCode() == HttpStatus.OK) {
+                System.out.println(response.getBody());
+            } else {
+                System.out.println("returned code(" + response.getStatusCode() + ")");
+            }
+        }
+
+    }
 
     public boolean insertNodeRecordsToMysql(String uri, ArrayList<NodeRecord> records){
         if (!uri.equalsIgnoreCase("")) {

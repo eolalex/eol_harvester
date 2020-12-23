@@ -1,10 +1,13 @@
 package org.bibalex.eol.parser.models;
 
+import java.util.ArrayList;
+
 public class Trait {
-    public static Integer traitCount = 0;
     String traitId;
     int resourceId;
     String taxonId;
+    String scientificName;
+    TraitLocation location;
     String bibliographicCitation;
     String measurementType;
     String measurementUnit;
@@ -12,8 +15,7 @@ public class Trait {
     String normalizedMeasurementUnit;
     String statisticalMethod;
     String source;
-    String referenceId;
-    String scientificName;
+    ArrayList<Reference> references =  new ArrayList<>();
     String targetTaxonId;
     String targetScientificName;
     String measurementValue;
@@ -21,9 +23,6 @@ public class Trait {
     String literal;
     String lifestage;
     String sex;
-    //TODO: add locations
-
-    //TODO: constructors attributes will differ based on whether it is a measuremnet or association
 
     public String getTraitId() {
         return traitId;
@@ -41,13 +40,6 @@ public class Trait {
         this.resourceId = resourceId;
     }
 
-    public String getTaxonId() {
-        return taxonId;
-    }
-
-    public void setTaxonId(String taxonId) {
-        this.taxonId = taxonId;
-    }
 
     public String getBibliographicCitation() {
         return bibliographicCitation;
@@ -105,21 +97,14 @@ public class Trait {
         this.source = source;
     }
 
-    public String getReferenceId() {
-        return referenceId;
+    public ArrayList<Reference> getReferences() {
+        return references;
     }
 
-    public void setReferenceId(String referenceId) {
-        this.referenceId = referenceId;
+    public void setReferences(ArrayList<Reference> references) {
+        this.references = references;
     }
 
-    public String getScientificName() {
-        return scientificName;
-    }
-
-    public void setScientificName(String scientificName) {
-        this.scientificName = scientificName;
-    }
 
     public String getTargetTaxonId() {
         return targetTaxonId;
@@ -177,52 +162,53 @@ public class Trait {
         this.sex = sex;
     }
 
-    public Trait(String traitId, int resourceId, String taxonId, String bibliographicCitation, String measurementUnit, String normalizedMeasurementValue,
-                 String normalizedMeasurementUnit, String statisticalMethod, String source, String referenceId,
-                 String scientificName, String measurementValue, String measurement, String literal, String lifestage,
-                 String sex)
+    public String getTaxonId() {
+        return taxonId;
+    }
+
+    public void setTaxonId(String taxonId) {
+        this.taxonId = taxonId;
+    }
+
+    public String getScientificName() {
+        return scientificName;
+    }
+
+    public void setScientificName(String scientificName) {
+        this.scientificName = scientificName;
+    }
+
+    public TraitLocation getLocation() {
+        return location;
+    }
+
+    public void setLocation(TraitLocation locationInfo) {
+        this.location = locationInfo;
+    }
+
+    public Trait(String traitId, int resourceId, String taxonId, String scientificName, String bibliographicCitation, String measurementUnit, String normalizedMeasurementValue,
+                 String normalizedMeasurementUnit, String statisticalMethod, String source,
+                 String measurementValue, String measurement, String literal, String lifestage,
+                 String sex, TraitLocation locationInfo)
     {
         this.traitId = traitId;
         this.resourceId = resourceId;
         this.taxonId = taxonId;
+        this.scientificName = scientificName;
         this.bibliographicCitation = bibliographicCitation;
         this.measurementUnit = measurementUnit;
         this.normalizedMeasurementValue = normalizedMeasurementValue;
         this.normalizedMeasurementUnit = normalizedMeasurementUnit;
         this.statisticalMethod = statisticalMethod;
         this.source = source;
-        this.referenceId = referenceId;
-        this.scientificName = scientificName;
         this.measurementValue = measurementValue;
         this.measurement = measurement;
         this.literal = literal;
         this.lifestage = lifestage;
         this.sex = sex;
+        this.location = locationInfo;
+    }
+
 
     }
 
-    @Override
-    public String toString() {
-        return "Trait{" +
-                "traitId='" + traitId + '\'' +
-                ", resourceId=" + resourceId +
-                ", taxonId='" + taxonId + '\'' +
-                ", bibliographicCitation='" + bibliographicCitation + '\'' +
-                ", measurementType='" + measurementType + '\'' +
-                ", measurementUnit='" + measurementUnit + '\'' +
-                ", normalizedMeasurementValue='" + normalizedMeasurementValue + '\'' +
-                ", normalizedMeasurementUnit='" + normalizedMeasurementUnit + '\'' +
-                ", statisticalMethod='" + statisticalMethod + '\'' +
-                ", source='" + source + '\'' +
-                ", referenceId='" + referenceId + '\'' +
-                ", scientificName='" + scientificName + '\'' +
-                ", targetTaxonId='" + targetTaxonId + '\'' +
-                ", targetScientificName='" + targetScientificName + '\'' +
-                ", measurementValue='" + measurementValue + '\'' +
-                ", measurement='" + measurement + '\'' +
-                ", literal='" + literal + '\'' +
-                ", lifestage='" + lifestage + '\'' +
-                ", sex='" + sex + '\'' +
-                '}';
-    }
-}

@@ -27,12 +27,12 @@ public class HarvesterController {
             PropertiesHandler.initializeProperties();
             SynonymNodeHandler.setSynonymNodeHandler();
             System.out.println("before download");
-            StorageLayerClient.downloadResource(resourceID + "", "1", "1");
+           // StorageLayerClient.downloadResource(resourceID + "", "1", "1");
             String updatedPath = PropertiesHandler.getProperty
                     ("storage.output.directory") + File.separator + resourceID + "_org";
             String oldPath = PropertiesHandler.getProperty
                     ("storage.output.directory") + File.separator + resourceID + "_old" + "_org";
-            StorageLayerClient.downloadResource(resourceID, "1", "0");
+            //StorageLayerClient.downloadResource(resourceID, "1", "0");
             try {
                 File checkOldVersion = new File(oldPath);
                 String checkFilePath = checkOldVersion.getPath();

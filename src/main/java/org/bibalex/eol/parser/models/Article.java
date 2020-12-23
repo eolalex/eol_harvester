@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Article {
     String taxonId;
     String mediaId;
-    String resourceId;
+    int resourceId;
     String subject;
     String title;
     String description;
@@ -23,7 +23,7 @@ public class Article {
     String publisher;
     String contributor;
     String creator;
-    String referenceId;
+    ArrayList<Reference> references =  new ArrayList<>();
     String deltaStatus;
     ArrayList<Agent> agents;
     String storageLayerPath;
@@ -31,11 +31,11 @@ public class Article {
     String controlSection;
     String format;
 
-    public Article(String taxonId, String mediaId, String resourceId, String subject,
+    public Article(int resourceId,String taxonId, String mediaId, String subject,
                    String title, String description, String furtherInformationURI, String derivedFrom, String createDate,
                    String modified, String language, String rating, String audience, String license, String rights,
                    String owner, String bibliographicCitation, String publisher, String contributor,
-                   String creator, String referenceId, String deltaStatus,String storageLayerPath,
+                   String creator, String deltaStatus,String storageLayerPath,
                    String storageLayerThumbnailPath, String controlSection,String format ) {
         this.taxonId = taxonId;
         this.mediaId = mediaId;
@@ -57,7 +57,6 @@ public class Article {
         this.publisher = publisher;
         this.contributor = contributor;
         this.creator = creator;
-        this.referenceId = referenceId;
         this.deltaStatus = deltaStatus;
         this.storageLayerPath = storageLayerPath;
         this.storageLayerThumbnailPath = storageLayerThumbnailPath;
@@ -86,11 +85,11 @@ public class Article {
         this.mediaId = mediaId;
     }
 
-    public String getResourceId() {
+    public int getResourceId() {
         return resourceId;
     }
 
-    public void setResourceId(String resourceId) {
+    public void setResourceId(int resourceId) {
         this.resourceId = resourceId;
     }
 
@@ -141,6 +140,14 @@ public class Article {
 
     public void setCreateDate(String createDate) {
         this.createDate = createDate;
+    }
+
+    public ArrayList<Reference> getReferences() {
+        return references;
+    }
+
+    public void setReferences(ArrayList<Reference> references) {
+        this.references = references;
     }
 
     public String getModified() {
@@ -231,13 +238,7 @@ public class Article {
         this.creator = creator;
     }
 
-    public String getReferenceId() {
-        return referenceId;
-    }
 
-    public void setReferenceId(String referenceId) {
-        this.referenceId = referenceId;
-    }
 
     public String getDeltaStatus() {
         return deltaStatus;

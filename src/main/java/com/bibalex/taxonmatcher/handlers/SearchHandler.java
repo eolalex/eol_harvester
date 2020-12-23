@@ -24,7 +24,7 @@ public class SearchHandler {
 
     public SearchHandler()
     {
-        globalNameHandler = new GlobalNamesHandler();
+
         solrHandler = new SolrHandler();
         logger = LogHandler.getLogger(NodeMapper.class.getName());
         neo4jHandler = new Neo4jHandler();
@@ -34,6 +34,7 @@ public class SearchHandler {
     private String buildSearchQuery(Node node, Strategy strategy, Node ancestor){
         String searchQuery = "";
         String scientificNameAttr = "scientific_name";
+        globalNameHandler = new GlobalNamesHandler(node.getScientificName());
         if (strategy != null){
             searchQuery += strategy.getIndex();
 //            searchQuery += strategy.getType().equalsIgnoreCase("in") ? " : " : " = ";
@@ -44,7 +45,7 @@ public class SearchHandler {
                searchQuery +=node.getScientificName();
             }
             else if(strategy.getIndex().equalsIgnoreCase("canonical_synonyms")||strategy.getIndex().equalsIgnoreCase("other_canonical_synonyms")){
-                searchQuery += globalNameHandler.getCanonicalForm(node.getScientificName());
+                searchQuery += globalNameHandler.getCanonicalForm();
             }
 
 
@@ -91,7 +92,7 @@ public class SearchHandler {
 //            }
             else{
                 searchQuery += strategy.getAttribute().equalsIgnoreCase(scientificNameAttr) ?
-                        node.getScientificName() : globalNameHandler.getCanonicalForm(node.getScientificName());
+                        node.getScientificName() : globalNameHandler.getCanonicalForm();
             }
             searchQuery += '"';
 
@@ -103,7 +104,7 @@ public class SearchHandler {
 //                //case other ancestor will not be valid in the code
 //                searchQuery += " AND ancestors_ids : " + ancestor.getGeneratedNodeId();
 //            }
-            if(globalNameHandler.isHybrid(node.getScientificName())){
+            if((boolean)globalNameHandler.getAttribute("hybrid")){
                 searchQuery += " AND is_hybrid : True";
             }
         }

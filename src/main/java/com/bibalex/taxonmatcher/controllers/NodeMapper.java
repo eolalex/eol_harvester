@@ -31,7 +31,6 @@ public class NodeMapper {
 
     public NodeMapper(int resourceId){
         strategyHandler = new StrategyHandler();
-        globalNameHandler = new GlobalNamesHandler();
         nodeHandler = new NodeHandler();
         matchingScoreHandler = new MatchingScoreHandler();
         searchHandler = new SearchHandler();
@@ -65,15 +64,16 @@ public class NodeMapper {
     }
 
     public void mapIfNeeded(Node node){
+        globalNameHandler = new GlobalNamesHandler(node.getScientificName());
         ancestorsStack.push(node);
         Strategy usedStrategy = strategyHandler.defaultStrategy();
         System.out.println("mapIfNeeded: used strategy is: " + usedStrategy.getAttribute());
         logger.info("mapIfNeeded: used strategy is: " + usedStrategy.getAttribute());
         int usedAncestorDepth = 0;
-        if (node.needsToBeMapped()&& globalNameHandler.isParsed(node.getScientificName())){
+        if (node.needsToBeMapped()&& globalNameHandler.isParsed()){
             System.out.println("mapIfNeeded: needs to be mapped");
             logger.info("mapIfNeeded: needs to be mapped");
-            if(!globalNameHandler.hasAuthority(node.getScientificName())){
+            if(!globalNameHandler.hasAuthority()){
                 System.out.println("mapIfNeeded: node does not have authority");
                 logger.info("mapIfNeeded: node does not have authority");
                 usedStrategy = strategyHandler.firstNonScientificStrategy();
@@ -95,8 +95,9 @@ public class NodeMapper {
     }
 
     private void mapNode(Node node, int depth, Strategy strategy){
+        globalNameHandler = new GlobalNamesHandler(node.getScientificName());
         Node ancestor;
-        if(globalNameHandler.isSurrogate(node.getScientificName())){
+        if((boolean)globalNameHandler.getAttribute("surrogate")){
             System.out.println("map node: surrogate");
             logger.info("map node: surrogate");
             unmappedNode(node);
@@ -105,7 +106,7 @@ public class NodeMapper {
             ArrayList<Node> ancestors = new ArrayList<>(ancestorsStack);
             ancestors.remove(ancestors.size()-1);
             Collections.reverse(ancestors);
-            if (globalNameHandler.isVirus(node.getScientificName())){
+            if ((boolean)globalNameHandler.getAttribute("virus")){
                 System.out.println("map node: virus");
                 logger.info("map node: virus");
                 //not finalized as we need ancestor to be arraylist

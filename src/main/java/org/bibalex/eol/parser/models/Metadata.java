@@ -1,5 +1,7 @@
 package org.bibalex.eol.parser.models;
 
+import java.util.ArrayList;
+
 public class Metadata {
     String traitId;
     int    resourceId;
@@ -10,25 +12,10 @@ public class Metadata {
     String measurementValue;
     String measurement;
     String literal;
+    ArrayList<Reference> references =  new ArrayList<>();
     String lifestage;
     String sex;
 
-    @Override
-    public String toString() {
-        return "Metadata{" +
-                "traitId='" + traitId + '\'' +
-                ", resourceId=" + resourceId +
-                ", measurementType='" + measurementType + '\'' +
-                ", measurementUnit='" + measurementUnit + '\'' +
-                ", statisticalMethod='" + statisticalMethod + '\'' +
-                ", source='" + source + '\'' +
-                ", measurementValue='" + measurementValue + '\'' +
-                ", measurement='" + measurement + '\'' +
-                ", literal='" + literal + '\'' +
-                ", lifestage='" + lifestage + '\'' +
-                ", sex='" + sex + '\'' +
-                '}';
-    }
 
     public Metadata(int resourceId, String measurementType,
                     String measurementUnit, String statisticalMethod, String source, String measurementValue,
@@ -45,10 +32,15 @@ public class Metadata {
         this.sex = sex;
     }
 
-    public Metadata ()
-    {}
+    public Metadata(){}
 
+    public ArrayList<Reference> getReferences() {
+        return references;
+    }
 
+    public void setReferences(ArrayList<Reference> references) {
+        this.references = references;
+    }
     public String getTraitId() {
         return traitId;
     }
@@ -135,5 +127,22 @@ public class Metadata {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    @Override
+    public String toString() {
+        return "Metadata{" +
+                "traitId='" + traitId + '\'' +
+                ", resourceId=" + resourceId +
+                ", measurementType='" + measurementType + '\'' +
+                ", measurementUnit='" + measurementUnit + '\'' +
+                ", statisticalMethod='" + statisticalMethod + '\'' +
+                ", source='" + source + '\'' +
+                ", measurementValue='" + measurementValue + '\'' +
+                ", measurement='" + measurement + '\'' +
+                ", literal='" + literal + '\'' +
+                ", lifestage='" + lifestage + '\'' +
+                ", sex='" + sex + '\'' +
+                '}';
     }
 }

@@ -21,7 +21,6 @@ public class Node implements Serializable {
     long updated_at;
     String canonicalName;
 
-    public Node(){}
     public Node(String nodeId, int resourceId, String scientificName, int generatedNodeId, String rank, int parentGeneratedNodeId,
                 String parentNodeId, String acceptedNodeId, int acceptedNodeGeneratedId) {
         this.nodeId = nodeId;

@@ -87,8 +87,8 @@ public class HarvesterAPI {
             dwcArchive = ArchiveFactory.openArchive(new File(path));
 
             //general
-            DwcaParser dwcaP = new DwcaParser(dwcArchive, newResource, entityManager);
-            dwcaP.prepareNodesRecord(resourceID);
+            DwcaParser dwcaP = new DwcaParser(dwcArchive, newResource, entityManager, resourceID);
+            dwcaP.prepareNodesRecord();
             return true;
         } catch (IOException e) {
             e.printStackTrace();

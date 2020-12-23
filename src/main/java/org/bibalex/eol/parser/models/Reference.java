@@ -6,54 +6,36 @@ package org.bibalex.eol.parser.models;
  */
 public class Reference {
     String referenceId;
-    String publicationType;
-    String fullReference;
-    String primaryTitle;
-    String secondaryTitle;
-    String pages;
-    String pageStart;
-    String pageEnd;
-    String volume;
-    String edition;
-    String publisher;
-    String authorsList;
-    String editorsList;
-    String dateCreated;
-    String language;
-    String url;
-    String doi;
-    String localityOfPublisher;
+    int resourceId;
+    String body;
     String deltaStatus;
 
     public Reference(String referenceId, String publicationType, String fullReference, String primaryTitle, String secondaryTitle,
                      String pages, String pageStart, String pageEnd, String volume, String edition, String publisher, String authorsList,
                      String editorsList, String dateCreated, String language, String url, String doi, String localityOfPublisher) {
+        StringBuilder str = new StringBuilder();
         this.referenceId = referenceId;
-        this.publicationType = publicationType;
-        this.fullReference = fullReference;
-        this.primaryTitle = primaryTitle;
-        this.secondaryTitle = secondaryTitle;
-        this.pages = pages;
-        this.pageStart = pageStart;
-        this.pageEnd = pageEnd;
-        this.volume = volume;
-        this.edition = edition;
-        this.publisher = publisher;
-        this.authorsList = authorsList;
-        this.editorsList = editorsList;
-        this.dateCreated = dateCreated;
-        this.language = language;
-        this.url = url;
-        this.doi = doi;
-        this.localityOfPublisher = localityOfPublisher;
-    }
+        this.resourceId = resourceId;
 
-    public String getDeltaStatus() {
-        return deltaStatus;
-    }
+        if(publicationType != null) {str.append(publicationType).append(" ");}
+        if(fullReference != null) {str.append(fullReference).append(" ");}
+        if(primaryTitle != null) {str.append(primaryTitle).append(" ");}
+        if(secondaryTitle != null) {str.append(secondaryTitle).append(" ");}
+        if(pages != null ) {str.append(pages).append(" ");}
+        if(pageStart != null){str.append(pageStart).append(" ");}
+        if(pageEnd != null) {str.append(pageEnd).append(" ");}
+        if(volume != null ) {str.append(volume).append(" ");}
+        if(edition != null) {str.append(edition).append(" ");}
+        if(publisher != null) {str.append(publisher).append(" ");}
+        if(authorsList != null) {str.append(authorsList).append(" ");}
+        if(editorsList != null) {str.append(editorsList).append(" ");}
+        if(dateCreated != null) {str.append(dateCreated).append(" ");}
+        if(language != null) {str.append(language).append(" ");}
+        if(url != null) {str.append(url).append(" ");}
+        if(doi != null) {str.append(doi).append(" ");}
+        if(localityOfPublisher != null) {str.append(localityOfPublisher).append(" ");}
 
-    public void setDeltaStatus(String deltaStatus) {
-        this.deltaStatus = deltaStatus;
+        this.body = str.toString();
     }
 
     public String getReferenceId() {
@@ -64,139 +46,28 @@ public class Reference {
         this.referenceId = referenceId;
     }
 
-    public String getPublicationType() {
-        return publicationType;
+    public int getResourceId() {
+        return resourceId;
     }
 
-    public void setPublicationType(String publicationType) {
-        this.publicationType = publicationType;
+    public void setResourceId(int resourceId) {
+        this.resourceId = resourceId;
     }
 
-    public String getFullReference() {
-        return fullReference;
+    public String getBody() {
+        return body;
     }
 
-    public void setFullReference(String fullReference) {
-        this.fullReference = fullReference;
+    public void setBody(String body) {
+        this.body = body;
     }
 
-    public String getPrimaryTitle() {
-        return primaryTitle;
+    public String getDeltaStatus() {
+        return deltaStatus;
     }
 
-    public void setPrimaryTitle(String primaryTitle) {
-        this.primaryTitle = primaryTitle;
+    public void setDeltaStatus(String deltaStatus) {
+        this.deltaStatus = deltaStatus;
     }
 
-    public String getSecondaryTitle() {
-        return secondaryTitle;
-    }
-
-    public void setSecondaryTitle(String secondaryTitle) {
-        this.secondaryTitle = secondaryTitle;
-    }
-
-    public String getPages() {
-        return pages;
-    }
-
-    public void setPages(String pages) {
-        this.pages = pages;
-    }
-
-    public String getPageStart() {
-        return pageStart;
-    }
-
-    public void setPageStart(String pageStart) {
-        this.pageStart = pageStart;
-    }
-
-    public String getPageEnd() {
-        return pageEnd;
-    }
-
-    public void setPageEnd(String pageEnd) {
-        this.pageEnd = pageEnd;
-    }
-
-    public String getVolume() {
-        return volume;
-    }
-
-    public void setVolume(String volume) {
-        this.volume = volume;
-    }
-
-    public String getEdition() {
-        return edition;
-    }
-
-    public void setEdition(String edition) {
-        this.edition = edition;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    public String getAuthorsList() {
-        return authorsList;
-    }
-
-    public void setAuthorsList(String authorsList) {
-        this.authorsList = authorsList;
-    }
-
-    public String getEditorsList() {
-        return editorsList;
-    }
-
-    public void setEditorsList(String editorsList) {
-        this.editorsList = editorsList;
-    }
-
-    public String getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(String dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getDoi() {
-        return doi;
-    }
-
-    public void setDoi(String doi) {
-        this.doi = doi;
-    }
-
-    public String getLocalityOfPublisher() {
-        return localityOfPublisher;
-    }
-
-    public void setLocalityOfPublisher(String localityOfPublisher) {
-        this.localityOfPublisher = localityOfPublisher;
-    }
 }
